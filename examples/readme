@@ -1,1 +1,3 @@
 ./q6 -c store_interface.mli store_interface.ml uuid.mli uuid.ml q6_interface.ml microblog.ml 2>1 typed_tree.out
+
+ocamlbuild -use-ocamlfind -tags thread -package cohttp.lwt -package yojson -package sexplib -package ppx_sexp_conv -package core sessionIdMap.ml store_interface.mli store_interface.ml uuid.mli uuid.ml q6_interface.ml microblog_app_runtime.ml driver.native
