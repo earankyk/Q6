@@ -1,4 +1,6 @@
 open Q6_interface
+open Sexplib
+open Sexplib.Std
 
 module List = 
 struct
@@ -50,8 +52,11 @@ end
 
 module User = 
 struct
-  type id = Uuid.t
-  type eff = Add of {username: string; pwd: string}
+  type id = int (*Uuid.t*) [@@deriving sexp]
+  type usernamePwd = {username: string; pwd: string} [@@deriving sexp]
+  type leaderId = {leader_id: id} [@@deriving sexp]
+  type followerId = {follower_id: id} [@@deriving sexp]
+  (*type eff = Add of {username: string; pwd: string}
     | AddFollowing of {leader_id: id}
     | RemFollowing of {leader_id: id}
     | AddFollower of {follower_id: id}
@@ -62,8 +67,24 @@ struct
     | GetIsBlockedBy
     | GetInfo
     | GetFollowers
-    | GetFollowing
+    | GetFollowing [@@deriving sexp]*)
+  type eff = Add of usernamePwd
+    | AddFollowing of leaderId
+    | RemFollowing of leaderId
+    | AddFollower of followerId
+    | RemFollower of followerId
+    | Blocks of followerId
+    | GetBlocks
+    | IsBlockedBy of leaderId
+    | GetIsBlockedBy
+    | GetInfo
+    | GetFollowers
+    | GetFollowing [@@deriving sexp]
+  let effToString x = (*Sexp.to_string_hum*) Sexp.string_of_sexp (sexp_of_eff x) 
+  let stringToEff x = eff_of_sexp (sexp_of_string x)
+  let id_to_str = (*Uuid.to_string*) string_of_int
 end
+
 module User_table =
 struct
   include Store_interface.Make(User)
@@ -71,8 +92,12 @@ end
 
 module UserName = 
 struct
-  type id = string
-  type eff = Add of {user_id: User.id} | GetId
+  type id = string [@@deriving sexp]
+  type userId = {user_id: User.id} [@@deriving sexp]
+  type eff = Add of userId | GetId [@@deriving sexp]
+  let effToString x = Sexp.to_string_hum (sexp_of_eff x)
+  let stringToEff x = eff_of_sexp (sexp_of_string x)
+  let id_to_str x = x
 end
 module UserName_table =
 struct
@@ -81,9 +106,13 @@ end
 
 module Tweet =
 struct
-  type id = Uuid.t
-  type eff = New of {author_id:User.id; content:string}
-    | Get
+  type id = int (*Uuid.t*) [@@deriving sexp]
+  type authorContent = {author_id:User.id; content:string} [@@deriving sexp]
+  type eff = New of authorContent 
+    | Get [@@deriving sexp]
+  let effToString x = Sexp.to_string_hum (sexp_of_eff x)
+  let stringToEff x = eff_of_sexp (sexp_of_string x)
+  let id_to_str = string_of_int 
 end
 module Tweet_table =
 struct
@@ -92,9 +121,13 @@ end
 
 module Timeline = 
 struct
-  type id = User.id
-  type eff = NewTweet of {tweet_id:Tweet.id}
-    | Get
+  type id = User.id [@@deriving sexp]
+  type tweetId = {tweet_id:Tweet.id} [@@deriving sexp]
+  type eff = NewTweet of tweetId
+    | Get [@@deriving sexp]
+  let effToString x = Sexp.to_string_hum (sexp_of_eff x)
+  let stringToEff x = eff_of_sexp (sexp_of_string x)
+  let id_to_str = (*Uuid.to_string*) string_of_int
 end
 module Timeline_table =
 struct
@@ -103,9 +136,13 @@ end
 
 module Userline = 
 struct
-  type id = User.id
-  type eff = NewTweet of {tweet_id:Tweet.id}
-    | Get
+  type id = User.id [@@deriving sexp]
+  type tweetId = {tweet_id:Tweet.id} [@@deriving sexp]
+  type eff = NewTweet of tweetId
+    | Get [@@deriving sexp]
+  let effToString x = Sexp.to_string_hum (sexp_of_eff x)
+  let stringToEff x = eff_of_sexp (sexp_of_string x)
+  let id_to_str = (*Uuid.to_string*) string_of_int
 end
 module Userline_table =
 
@@ -118,12 +155,12 @@ end
  * There is a zip/map2 bug unfixed. Fix goes in mkfun 
  * inside rdtextract.ml
  *) 
-let do_test1 uid name = 
+let do_test1 uid name sessionId seqNo = 
   let x = [1;2] in
   let y = UserName.GetId in
   let z = UserName.Add {user_id=uid} in
-  let u1 = UserName_table.append name z in
-  let u2 = UserName_table.get name y in
+  let u1 = UserName_table.append name z "username" sessionId seqNo in
+  let u2 = UserName_table.get name "username" y in
   let u3 = List.map 
              (fun eff -> match eff with
                 | Some (UserName.Add {user_id=uid'}) -> Some uid'
@@ -133,15 +170,15 @@ let do_test1 uid name =
                              | None -> acc) u3 [] in
     u4
 
-let do_add_user name pwd = 
-  let uid = Uuid.create() in
+let do_add_user name pwd sessionId seqNo = 
+  let uid = Random.int 1000000 (*Uuid.create()*) in
   begin
-    UserName_table.append name (UserName.Add {user_id=uid});
-    User_table.append uid (User.Add {username=name;pwd=pwd})
+    UserName_table.append name (UserName.Add {user_id=uid}) "username" sessionId seqNo;
+    User_table.append uid (User.Add {username=name;pwd=pwd}) "username" sessionId seqNo
   end 
 
 let get_user_id_by_name nm = 
-  let ctxt = (* ea *) UserName_table.get nm (UserName.GetId) in
+  let ctxt = (* ea *) UserName_table.get "username" nm (UserName.GetId) in
   let ids = List.map (fun eff -> match eff with 
                         | Some (UserName.Add {user_id=id}) -> Some id 
                         | _ -> None) ctxt in
@@ -153,18 +190,18 @@ let get_user_id_by_name nm =
       List.first_some ids
     end
 
-let do_block_user me other  = 
+let do_block_user me other sessionId seqNo = 
   let Some my_id = get_user_id_by_name me in
   let Some other_id = get_user_id_by_name other in
     begin
-      User_table.append my_id (User.Blocks {follower_id=other_id});
-      User_table.append other_id (User.IsBlockedBy {leader_id=my_id});
-      User_table.append my_id (User.RemFollower {follower_id=other_id}); 
-     User_table.append other_id (User.RemFollowing {leader_id=my_id})
+      User_table.append my_id (User.Blocks {follower_id=other_id}) "User" sessionId seqNo;
+      User_table.append other_id (User.IsBlockedBy {leader_id=my_id}) "User" sessionId seqNo;
+      User_table.append my_id (User.RemFollower {follower_id=other_id}) "User" sessionId seqNo; 
+     User_table.append other_id (User.RemFollowing {leader_id=my_id}) "User" sessionId seqNo
     end
 
-let do_new_tweet uid str = 
-  let ctxt = User_table.get uid (User.GetFollowers) in
+let do_new_tweet uid str sessionId seqNo = 
+  let ctxt = User_table.get uid "user" (User.GetFollowers) in
   let fids = List.map 
                (fun eff -> match eff with 
                   | Some x -> 
@@ -172,19 +209,19 @@ let do_new_tweet uid str =
                          | User.AddFollower {follower_id=fid} -> Some fid
                          | _ -> None)
                   | _ -> None) ctxt in
-  let tweet_id = Uuid.create() in
+  let tweet_id = Random.int 1000000 (*Uuid.create()*) in
     begin
-      Tweet_table.append tweet_id (Tweet.New {author_id=uid; content=str});
-      Userline_table.append uid (Userline.NewTweet {tweet_id=tweet_id});
+      Tweet_table.append tweet_id (Tweet.New {author_id=uid; content=str}) "tweet" sessionId seqNo;
+      Userline_table.append uid (Userline.NewTweet {tweet_id=tweet_id}) "tweet" sessionId seqNo;
       List.iter 
         (fun fidop -> match fidop with 
            | Some fid -> Timeline_table.append fid 
-                      (Timeline.NewTweet {tweet_id=tweet_id})
+                      (Timeline.NewTweet {tweet_id=tweet_id}) "timeline" sessionId seqNo
            | None -> ()) fids;
     end
 
 let get_tweet tid = 
-  let ctxt = Tweet_table.get tid (Tweet.Get) in
+  let ctxt = Tweet_table.get tid "tweet" (Tweet.Get) in
   let tweets = List.map (fun eff -> match eff with
                            | Some (Tweet.New {content}) -> Some content
                            | _ -> None) ctxt in
@@ -192,12 +229,12 @@ let get_tweet tid =
     res
 
 let inv_fkey uid' = 
-  List.forall (Userline_table.get uid' (Userline.Get))
+  List.forall (Userline_table.get uid' "userline" (Userline.Get))
     (fun e -> match e with
        | Some x -> 
            (match x with 
               | Userline.NewTweet {tweet_id=tid} -> 
-                  List.exists (Tweet_table.get tid Tweet.Get) 
+                  List.exists (Tweet_table.get tid "userline" Tweet.Get) 
                     (fun e' -> match e' with 
                        | Some y -> (match y with 
                                       | (Tweet.New _) -> true 
@@ -207,7 +244,7 @@ let inv_fkey uid' =
        | _ -> true)
 
 let get_userline uid = 
-  let ctxt = Userline_table.get uid (Userline.Get) in
+  let ctxt = Userline_table.get uid "userline" (Userline.Get) in
   let tweets = List.map 
                  (fun x -> match x with 
                     | Some y -> 

@@ -1,0 +1,6 @@
+#!/bin/sh
+./q6 -I ~/.opam/4.03.0/lib/lwt/ -I ~/.opam/4.03.0/lib/cohttp/ -I ~/.opam/4.03.0/lib/yojson/ -I ~/.opam/4.03.0/lib/uri/ -c store_interface.mli store_interface.ml uuid.mli uuid.ml q6_interface.ml microblog_app.ml lwt.cmxa cohttp.cmxa yojson.cmxa uri.cmxa
+
+(*ocamlbuild -use-ocamlfind -package cohttp.lwt -package yojson -package sexplib -package ppx_sexp_conv store_interface.mli store_interface.ml uuid.mli uuid.ml q6_interface.ml microblog_app_runtime.ml driver.native*)
+
+(*ocamlbuild -use-ocamlfind -tags thread -package cohttp.lwt -package yojson -package sexplib -package ppx_sexp_conv -package core sessionIdMap.ml store_interface.mli store_interface.ml uuid.mli uuid.ml q6_interface.ml microblog_app_runtime.ml driver.native*)

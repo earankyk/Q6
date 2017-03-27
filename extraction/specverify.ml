@@ -749,7 +749,7 @@ let doIt_inv (env: env) (Fun.T {name;args_t;body}) =
     end
 
 let doIt (ke,te,pe,ve) rdt_spec k' = 
-  let _ = k := 11 (* k'*) in
+  let _ = k := 6 (* k'*) in
   let _ = eff_consts := 
           List.tabulate !k (fun i -> 
                               Ident.create @@ "E"^(string_of_int i)) in

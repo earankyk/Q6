@@ -65,7 +65,7 @@ let (++) x f = f x
 let implementation ppf sourcefile outputprefix =
   Compmisc.init_path false;
   let modulename = module_of_filename ppf sourcefile outputprefix in
-  (* let _ = Printf.printf "implementation: %s\n" sourcefile in*)
+  let _ = Printf.printf "implementation: %s\n" sourcefile in
   Env.set_unit_name modulename;
   let env = Compmisc.initial_env() in
   let is_app_mod sourcefile = 

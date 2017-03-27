@@ -1,0 +1,238 @@
+### Starting build.
+# Target: driver.ml.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:ml, file:driver.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules driver.ml > driver.ml.depends # cached
+# Target: microblog_app_runtime.ml.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:ml, file:microblog_app_runtime.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules microblog_app_runtime.ml > microblog_app_runtime.ml.depends
+# Target: q6_interface.ml.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:ml, file:q6_interface.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules q6_interface.ml > q6_interface.ml.depends # cached
+# Target: q6_interface.cmo, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), byte, compile, extension:cmo, extension:ml, file:q6_interface.cmo, file:q6_interface.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o q6_interface.cmo q6_interface.ml # cached
+# Target: sessionIdMap.ml.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:ml, file:sessionIdMap.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules sessionIdMap.ml > sessionIdMap.ml.depends # cached
+# Target: sessionIdMap.cmo, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), byte, compile, extension:cmo, extension:ml, file:sessionIdMap.cmo, file:sessionIdMap.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o sessionIdMap.cmo sessionIdMap.ml # cached
+# Target: store_interface.mli.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:mli, file:store_interface.mli, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules store_interface.mli > store_interface.mli.depends # cached
+# Target: store_interface.cmi, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), byte, compile, extension:mli, file:store_interface.mli, interf, ocaml, quiet, thread }
+ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o store_interface.cmi store_interface.mli # cached
+# Target: uuid.mli.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:mli, file:uuid.mli, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules uuid.mli > uuid.mli.depends # cached
+# Target: uuid.cmi, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), byte, compile, extension:mli, file:uuid.mli, interf, ocaml, quiet, thread }
+ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o uuid.cmi uuid.mli # cached
+# Target: microblog_app_runtime.cmo, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), byte, compile, extension:cmo, extension:ml, file:microblog_app_runtime.cmo, file:microblog_app_runtime.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o microblog_app_runtime.cmo microblog_app_runtime.ml
++ ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o microblog_app_runtime.cmo microblog_app_runtime.ml
+findlib: [WARNING] Interface topdirs.cmi occurs in several directories: /home/opam/.opam/4.03.0/lib/ocaml/compiler-libs, /home/opam/.opam/4.03.0/lib/ocaml
+File "microblog_app_runtime.ml", line 164, characters 23-36:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 169, characters 37-51:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 179, characters 45-58:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 180, characters 36-59:
+Warning 40: this record of type User.usernamePwd contains fields that are 
+not visible in the current scope: username pwd.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 186, characters 45-57:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 197, characters 6-16:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+None
+File "microblog_app_runtime.ml", line 198, characters 6-19:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+None
+File "microblog_app_runtime.ml", line 200, characters 43-65:
+Warning 40: this record of type User.followerId contains fields that are 
+not visible in the current scope: follower_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 201, characters 51-68:
+Warning 40: this record of type User.leaderId contains fields that are 
+not visible in the current scope: leader_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 202, characters 48-70:
+Warning 40: this record of type User.followerId contains fields that are 
+not visible in the current scope: follower_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 203, characters 51-68:
+Warning 40: this record of type User.leaderId contains fields that are 
+not visible in the current scope: leader_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 212, characters 44-61:
+Warning 40: this record of type User.followerId contains fields that are 
+not visible in the current scope: follower_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 217, characters 45-73:
+Warning 40: this record of type Tweet.authorContent contains fields that are 
+not visible in the current scope: author_id content.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 218, characters 51-70:
+Warning 40: this record of type Userline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 221, characters 70-89:
+Warning 40: this record of type Timeline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 228, characters 45-54:
+Warning 40: this record of type Tweet.authorContent contains fields that are 
+not visible in the current scope: content.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 238, characters 34-48:
+Warning 40: this record of type Userline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 254, characters 47-61:
+Warning 40: this record of type Userline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 162, characters 6-7:
+Warning 26: unused variable x.
+File "microblog_app_runtime.ml", line 165, characters 6-8:
+Warning 26: unused variable u1.
+# Target: driver.cmo, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), byte, compile, extension:cmo, extension:ml, file:driver.cmo, file:driver.ml, implem, ocaml, quiet, thread }
+ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o driver.cmo driver.ml
++ ocamlfind ocamlc -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o driver.cmo driver.ml
+findlib: [WARNING] Interface topdirs.cmi occurs in several directories: /home/opam/.opam/4.03.0/lib/ocaml/compiler-libs, /home/opam/.opam/4.03.0/lib/ocaml
+File "driver.ml", line 88, characters 81-99:
+Warning 10: this expression should have type unit.
+File "driver.ml", line 88, characters 4-129:
+Warning 10: this expression should have type unit.
+File "driver.ml", line 12, characters 8-12:
+Warning 26: unused variable post.
+File "driver.ml", line 22, characters 8-12:
+Warning 26: unused variable post.
+File "driver.ml", line 33, characters 8-12:
+Warning 26: unused variable post.
+File "driver.ml", line 84, characters 8-9:
+Warning 26: unused variable x.
+File "driver.ml", line 85, characters 8-9:
+Warning 26: unused variable x.
+File "driver.ml", line 86, characters 8-9:
+Warning 26: unused variable x.
+# Target: q6_interface.cmx, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), compile, extension:cmx, extension:ml, file:q6_interface.cmx, file:q6_interface.ml, implem, native, ocaml, quiet, thread }
+ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o q6_interface.cmx q6_interface.ml # cached
+# Target: sessionIdMap.cmx, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), compile, extension:cmx, extension:ml, file:sessionIdMap.cmx, file:sessionIdMap.ml, implem, native, ocaml, quiet, thread }
+ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o sessionIdMap.cmx sessionIdMap.ml # cached
+# Target: store_interface.ml.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:ml, file:store_interface.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules store_interface.ml > store_interface.ml.depends # cached
+# Target: store_interface.cmx, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), compile, extension:cmx, extension:ml, file:store_interface.cmx, file:store_interface.ml, implem, native, ocaml, quiet, thread }
+ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o store_interface.cmx store_interface.ml # cached
+# Target: uuid.ml.depends, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), extension:ml, file:uuid.ml, ocaml, ocamldep, quiet, thread }
+ocamlfind ocamldep -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -modules uuid.ml > uuid.ml.depends # cached
+# Target: uuid.cmx, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), compile, extension:cmx, extension:ml, file:uuid.cmx, file:uuid.ml, implem, native, ocaml, quiet, thread }
+ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o uuid.cmx uuid.ml # cached
+# Target: microblog_app_runtime.cmx, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), compile, extension:cmx, extension:ml, file:microblog_app_runtime.cmx, file:microblog_app_runtime.ml, implem, native, ocaml, quiet, thread }
+ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o microblog_app_runtime.cmx microblog_app_runtime.ml
++ ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o microblog_app_runtime.cmx microblog_app_runtime.ml
+findlib: [WARNING] Interface topdirs.cmi occurs in several directories: /home/opam/.opam/4.03.0/lib/ocaml/compiler-libs, /home/opam/.opam/4.03.0/lib/ocaml
+File "microblog_app_runtime.ml", line 164, characters 23-36:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 169, characters 37-51:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 179, characters 45-58:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 180, characters 36-59:
+Warning 40: this record of type User.usernamePwd contains fields that are 
+not visible in the current scope: username pwd.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 186, characters 45-57:
+Warning 40: this record of type UserName.userId contains fields that are 
+not visible in the current scope: user_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 197, characters 6-16:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+None
+File "microblog_app_runtime.ml", line 198, characters 6-19:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+None
+File "microblog_app_runtime.ml", line 200, characters 43-65:
+Warning 40: this record of type User.followerId contains fields that are 
+not visible in the current scope: follower_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 201, characters 51-68:
+Warning 40: this record of type User.leaderId contains fields that are 
+not visible in the current scope: leader_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 202, characters 48-70:
+Warning 40: this record of type User.followerId contains fields that are 
+not visible in the current scope: follower_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 203, characters 51-68:
+Warning 40: this record of type User.leaderId contains fields that are 
+not visible in the current scope: leader_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 212, characters 44-61:
+Warning 40: this record of type User.followerId contains fields that are 
+not visible in the current scope: follower_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 217, characters 45-73:
+Warning 40: this record of type Tweet.authorContent contains fields that are 
+not visible in the current scope: author_id content.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 218, characters 51-70:
+Warning 40: this record of type Userline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 221, characters 70-89:
+Warning 40: this record of type Timeline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 228, characters 45-54:
+Warning 40: this record of type Tweet.authorContent contains fields that are 
+not visible in the current scope: content.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 238, characters 34-48:
+Warning 40: this record of type Userline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 254, characters 47-61:
+Warning 40: this record of type Userline.tweetId contains fields that are 
+not visible in the current scope: tweet_id.
+They will not be selected if the type becomes unknown.
+File "microblog_app_runtime.ml", line 162, characters 6-7:
+Warning 26: unused variable x.
+File "microblog_app_runtime.ml", line 165, characters 6-8:
+Warning 26: unused variable u1.
+# Target: driver.cmx, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), compile, extension:cmx, extension:ml, file:driver.cmx, file:driver.ml, implem, native, ocaml, quiet, thread }
+ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o driver.cmx driver.ml
++ ocamlfind ocamlopt -c -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt -o driver.cmx driver.ml
+findlib: [WARNING] Interface topdirs.cmi occurs in several directories: /home/opam/.opam/4.03.0/lib/ocaml/compiler-libs, /home/opam/.opam/4.03.0/lib/ocaml
+File "driver.ml", line 88, characters 81-99:
+Warning 10: this expression should have type unit.
+File "driver.ml", line 88, characters 4-129:
+Warning 10: this expression should have type unit.
+File "driver.ml", line 12, characters 8-12:
+Warning 26: unused variable post.
+File "driver.ml", line 22, characters 8-12:
+Warning 26: unused variable post.
+File "driver.ml", line 33, characters 8-12:
+Warning 26: unused variable post.
+File "driver.ml", line 84, characters 8-9:
+Warning 26: unused variable x.
+File "driver.ml", line 85, characters 8-9:
+Warning 26: unused variable x.
+File "driver.ml", line 86, characters 8-9:
+Warning 26: unused variable x.
+# Target: driver.native, tags: { package(cohttp.lwt), package(core), package(ppx_sexp_conv), package(sexplib), package(yojson), dont_link_with, extension:native, file:driver.native, link, native, ocaml, program, quiet, thread }
+ocamlfind ocamlopt -linkpkg -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt q6_interface.cmx sessionIdMap.cmx store_interface.cmx microblog_app_runtime.cmx uuid.cmx driver.cmx -o driver.native
++ ocamlfind ocamlopt -linkpkg -thread -package core -package ppx_sexp_conv -package sexplib -package yojson -package cohttp.lwt q6_interface.cmx sessionIdMap.cmx store_interface.cmx microblog_app_runtime.cmx uuid.cmx driver.cmx -o driver.native
+findlib: [WARNING] Interface topdirs.cmi occurs in several directories: /home/opam/.opam/4.03.0/lib/ocaml/compiler-libs, /home/opam/.opam/4.03.0/lib/ocaml
+# Compilation successful.

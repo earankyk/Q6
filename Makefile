@@ -10,7 +10,7 @@ CAMLLEX=ocamllex
 CAMLDEP=ocamlde
 DEPFLAGS=$(INCLUDES)
 COMPFLAGS=-strict-sequence -principal -absname \
-          -bin-annot -safe-string -strict-formats $(INCLUDES)
+          -bin-annot $(INCLUDES)
 LINKFLAGS=
 
 OCAMLBUILDBYTE=$(WITH_OCAMLBUILD:=.byte)
@@ -77,7 +77,7 @@ q6.byte: $(ALLOBJS)
 	$(CAMLC) $(LINKFLAGS) -custom -o q6.byte str.cma unix.cma nums.cma $(ALLOBJS)
 
 q6.opt: $(ALLOBJS:.cmo=.cmx) $(MYFILES) $(COMP:.cmo=.cmx)
-	$(CAMLOPT) $(LINKFLAGS) -I `opam config var lib`/Z3 -cclib -L/Users/gowtham/git/z3/build/lib -o q6.opt str.cmxa unix.cmxa nums.cmxa z3ml.cmxa $(ALLOBJS:.cmo=.cmx) $(MYCMX) $(COMP:.cmo=.cmx)
+	ocamlfind $(CAMLOPT) $(LINKFLAGS)  -package cohttp.lwt -I /home/opam/.opam/4.03.0/lib/ocaml/site-lib/Z3 -cclib -L/home/z3/build -o q6.opt str.cmxa unix.cmxa nums.cmxa z3ml.cmxa $(ALLOBJS:.cmo=.cmx) $(MYCMX) $(COMP:.cmo=.cmx)
 
 reconfigure:
 	./configure $(CONFIGURE_ARGS)

@@ -871,7 +871,7 @@ let report_error env ppf = function
       fprintf ppf "Unbound value %a" longident lid;
       spellcheck ppf fold_values env lid;
   | Unbound_module lid ->
-      fprintf ppf "Unbound module %a" longident lid;
+      fprintf ppf "Unbound module* %a" longident lid;
       spellcheck ppf fold_modules env lid;
   | Unbound_constructor lid ->
       fprintf ppf "Unbound constructor %a" longident lid;
